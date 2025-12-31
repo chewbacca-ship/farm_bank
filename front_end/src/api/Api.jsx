@@ -83,7 +83,7 @@ class TokenManager {
     clearToken() {
         this.token = null;
         this.user = null;
-        localStorage.removeItem('token');const response = await api.post('/api/signup', userData);
+        localStorage.removeItem('token');
         localStorage.removeItem('user');
     }
 
