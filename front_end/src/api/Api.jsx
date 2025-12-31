@@ -83,7 +83,7 @@ class TokenManager {
     clearToken() {
         this.token = null;
         this.user = null;
-        localStorage.removeItem('token');
+        localStorage.removeItem('token');const response = await api.post('/api/signup', userData);
         localStorage.removeItem('user');
     }
 
@@ -102,7 +102,7 @@ const tokenManager = new TokenManager();
 export const auth = {
     async signup(userData) {
         try {
-            const response = await api.post('/signup', userData);
+            const response = await api.post('/api/signup', userData);
             tokenManager.setToken(response.data.access_token, response.data.user);
             return { success: true, data: response.data };
         } catch (error) {
@@ -113,7 +113,7 @@ export const auth = {
 
     async signin(credentials) {
         try {
-            const response = await api.post('/signin', credentials);
+            const response = await api.post('/api/signin', credentials);
             tokenManager.setToken(response.data.access_token, response.data.user);
             return { success: true, data: response.data };
         } catch (error) {
@@ -124,7 +124,7 @@ export const auth = {
 
     async getProfile() {
         try {
-            const response = await api.get('/profile');
+            const response = await api.get('/api/profile');
             return { success: true, data: response.data };
         } catch (error) {
             const errorMessage = error.response?.data?.error || 'Network error';
@@ -149,7 +149,7 @@ export const auth = {
 export const dataBase = {
     async fetchCommodity(commodity) {
         try {
-            const response = await api.get(`/data/${commodity}`);
+            const response = await api.get(`/api/data/${commodity}`);
             return response.data;
         } catch (error) {
             console.error("Error fetching commodity data:", error);
@@ -160,7 +160,7 @@ export const dataBase = {
     // Add more data fetching functions as needed
     async fetchUserData() {
         try {
-            const response = await api.get('/user/data');
+            const response = await api.get('/api/user/data');
             return response.data;
         } catch (error) {
             console.error("Error fetching user data:", error);
@@ -170,7 +170,7 @@ export const dataBase = {
 
     async fetchDashboard() {
         try {
-            const response = await api.get('/dashboard');
+            const response = await api.get('/api/dashboard');
             return response.data;
         } catch (error) {
             console.error("Error fetching dashboard data:", error);
@@ -180,7 +180,7 @@ export const dataBase = {
 
     async fetchOpportunities() {
         try {
-            return await api.get('/opportunities');
+            return await api.get('/api/opportunities');
             
         } catch (error) {
             console.error("Error fetching opportunities", error)
@@ -190,7 +190,7 @@ export const dataBase = {
 
     async fetchNews() {
         try {
-            return await api.get('/agriculture-news')
+            return await api.get('/api/agriculture-news')
         } catch (error) {
             console.error("Error fetching news", error)
             throw error
@@ -199,7 +199,7 @@ export const dataBase = {
 
     async addInvestment(investment) {
         try {
-            await api.post('/investment/add', investment);
+            await api.post('/api/investment/add', investment);
         } catch (error) {
             console.error("Error adding investment:", error);
             throw error;
@@ -208,7 +208,7 @@ export const dataBase = {
 
     async updateInvestment(updatedInvestment) {
         try {
-            await api.put('/investment/update', updatedInvestment )
+            await api.put('/api/investment/update', updatedInvestment )
         } 
         catch (error) {
             console.error("Error updating investment:", error);
@@ -220,7 +220,7 @@ export const dataBase = {
     
     async withdrawInvestment(withdrawal) {
         try {
-            await api.post('/investment/withdraw', withdrawal);
+            await api.post('/api/investment/withdraw', withdrawal);
         } catch (error) {
             console.error("Error withdrawing investment:", error);
             throw error;
@@ -229,7 +229,7 @@ export const dataBase = {
 
     async transferInvestment(payload) {
         try {
-            await api.post('/investment/transfer', payload);
+            await api.post('/api/investment/transfer', payload);
         } catch (error) {
             console.error("Error transferring investment:", error);
             throw error;
@@ -238,7 +238,7 @@ export const dataBase = {
 
     async exitInvestment(payload) {
         try {
-            await api.post('/investment/exit', payload);
+            await api.post('/api/investment/exit', payload);
         } catch (error) {
             console.error("Error exiting investment:", error);
             throw error;
@@ -252,7 +252,7 @@ export const transactions = {
 
     async create_payment(paymentData) {
         try {
-            return await api.post('/payment', paymentData)
+            return await api.post('/api/payment', paymentData)
 
         }  catch (error) {
             console.error("Error making payment:", error);
