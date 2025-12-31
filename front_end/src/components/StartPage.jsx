@@ -38,7 +38,7 @@ const StartPage = () => {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 p-4">
         <div className="w-full max-w-md space-y-8">
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-bold text-gray-900">AgriInvest</h1>
+            <h1 className="text-3xl font-bold text-gray-900">Pasture Portfolio</h1>
             <p className="text-gray-600">Choose your role to get started</p>
           </div>
           
