@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const { query, pool } = require('./db');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const resend = require('./lib/resend');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const clientURL = process.env.CLIENT_URL || process.env.CLIENT_ORIGIN || 'http://localhost:5173';

@@ -4,8 +4,8 @@ async function createTables() {
   const createTablesQuery = `
     CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY,
-      first_name VARCHAR(80) UNIQUE NOT NULL,
-      last_name VARCHAR(80) UNIQUE NOT NULL,
+      first_name VARCHAR(80) NOT NULL,
+      last_name VARCHAR(80)  NOT NULL,
       username VARCHAR(80) UNIQUE NOT NULL,
       email VARCHAR(120) UNIQUE NOT NULL,
       phone_number BIGINT NOT NULL, 

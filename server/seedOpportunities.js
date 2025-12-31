@@ -1,5 +1,6 @@
 const { query } = require('./db');
 
+
 async function seedOpportunities() {
   const opportunities = [
     {
