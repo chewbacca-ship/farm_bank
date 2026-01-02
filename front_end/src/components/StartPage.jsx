@@ -2,12 +2,16 @@ import { useState } from "react";
 import { Users, Wheat } from 'lucide-react';
 import Signup from '../components/Signup'
 import SignIn from "../components/SignIn";
+import Hero from "./Hero";
+import Testimonials from "./Testimonials";
+import Footer from "./Footer";
 
 const StartPage = () => {
 
     const [selectedRole, setSelectedRole] = useState(null);
     const [authMode, setAuthMode] = useState('login');
     const [signIn, setSignIn] = useState(true)
+    const [landingPage, setLandingPage] = useState(true);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -84,6 +88,14 @@ const StartPage = () => {
 
     return (
         <section className="flex flex-col items-center ">
+    {landingPage &&  <div>
+            <Hero setLandingPage={setLandingPage} />
+            <Testimonials />
+            <Footer />
+
+          </div>}
+          {!landingPage &&  <div>
+            
             <button
               
               onClick={() => setSelectedRole(null)}
@@ -93,24 +105,25 @@ const StartPage = () => {
             </button>
 
             <div className="space-y-2">
-            <div className="flex items-center justify-center space-x-2">
-              {selectedRole === 'investor' ? (
-                <Users className="w-6 h-6 text-blue-600" />
-              ) : (
-                <Wheat className="w-6 h-6 text-green-600" />
-              )}
-              <h1 className="text-2xl font-bold">
-                {selectedRole === 'investor' ? 'Investor Portal' : 'Farmer Portal'}
-              </h1>
+              <div className="flex items-center justify-center space-x-2">
+                {selectedRole === 'investor' ? (
+                  <Users className="w-6 h-6 text-blue-600" />
+                ) : (
+                  <Wheat className="w-6 h-6 text-green-600" />
+                )}
+                <h1 className="text-2xl font-bold">
+                  {selectedRole === 'investor' ? 'Investor Portal' : 'Farmer Portal'}
+                </h1>
+              </div>
+              <p className="text-gray-600">
+                {selectedRole === 'investor' 
+                  ? 'Access your investment dashboard' 
+                  : 'Manage your agricultural projects'
+                }
+              </p>
             </div>
-            <p className="text-gray-600">
-              {selectedRole === 'investor' 
-                ? 'Access your investment dashboard' 
-                : 'Manage your agricultural projects'
-              }
-            </p>
-          </div>
-              <article className="bg-white  border-2 w-96 p-4">
+            </div>}
+              {!landingPage && <article className="bg-white   w-96 p-4">
                 <div className="w-full flex flex-row items-center justify-between bg-gray-300 p-2 rounded-2xl ">
 
                     <button 
@@ -123,11 +136,13 @@ const StartPage = () => {
                     >Sign Up</button>
                 </div>
 
-                {signIn && <SignIn selectedRole={selectedRole}/>}
-                {!signIn && <Signup selectedRole={selectedRole}/>}
+                {signIn && !landingPage && <SignIn selectedRole={selectedRole}  setSignIn={setSignIn} />}
+                {!signIn && !landingPage && <Signup selectedRole={selectedRole}/>}
+                
+                
 
                 
-              </article>
+              </article>}
         </section>
     )
     

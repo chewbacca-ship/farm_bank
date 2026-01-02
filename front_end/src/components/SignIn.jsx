@@ -2,7 +2,7 @@ import { useState } from "react";
 import { auth } from "../api/Api";
 import {  useNavigate } from "react-router-dom";
 
-const SignIn = ({selectedRole}) => {
+const SignIn = ({selectedRole, setSignIn}) => {
 
     const roleToUse = selectedRole || 'investor'
 
@@ -119,7 +119,7 @@ const SignIn = ({selectedRole}) => {
                 <button
                     type="button"
                     className="font-semibold text-emerald-600 hover:text-emerald-700"
-                    onClick={() => navigate('/signup')}
+                    onClick={() => setSignIn(false)}
                 >
                     Create account
                 </button>

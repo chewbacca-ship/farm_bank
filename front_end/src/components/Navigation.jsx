@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { auth } from "../api/Api";
 
-const Navigation = () => {
+const Navigation = ({ onItemSelect }) => {
 
     const storedUser = auth.getUser()
     const role = storedUser?.role || 'investor'
@@ -44,18 +44,18 @@ const Navigation = () => {
     
 
     return (
-        <nav className="flex flex-row justify-between items-center border p-4 " >
+        <nav className="flex flex-col lg:flex-row justify-between items-center  p-4 " >
             <header 
-                className="flex flex-row"
+                className="flex flex-row my-2"
                 
             >
                 
-                <div className="p-2  rounded-lg bg-gray-900 text-white w-10 mr-2">
+                <div className="p-2  rounded-lg bg-gray-900 text-white w-10 mr-2 hidden">
                     <LayoutDashboard className="h-6 w-6 " />
                 </div>
-                <div className="">
-                    <h1 className="text-xl font-bold">AgriInvest</h1>
-                    <p className="text-xs text-muted-foreground">Agricultural Investment Platform</p>
+                <div className="hidden">
+                    <h1 className="text-lg lg:text-xl font-bold">Pasture Portfolio</h1>
+                    <p className="text-[12px] -mt-2 lg:text-xs text-muted-foreground">Agricultural Investment Platform</p>
                 </div>
          
         
@@ -64,7 +64,7 @@ const Navigation = () => {
                 
                 
                 <div key={item.id} className="" >
-                    <NavLink to={`/${item.id}`} className={({isActive}) => `p-2 rounded-lg flex flex-row items-center ${isActive? 'bg-gray-950 text-white' : ''}`}>
+                    <NavLink to={`/${item.id}`} onClick={onItemSelect} className={({isActive}) => `p-2 rounded-lg flex flex-row items-center ${isActive? 'bg-gray-950 text-white' : ''}`}>
                         <item.icon className="h-4 w-4 mr-2"/>
                         <p className="text-sm font-bold ">{item.label}</p>
                         

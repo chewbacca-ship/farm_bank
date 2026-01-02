@@ -88,17 +88,17 @@ const Dashboard = () => {
 
    
     return (
-        <section className="relative min-h-screen bg-slate-100 py-10">
+        <section className="relative min-h-screen w-screen bg-slate-100 py-10 overflow-hidden">
             {showManageInvestment && <div className="fixed inset-0 z-30 bg-slate-900/50" aria-hidden="true" />}
             <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6">
                 <header className="rounded-2xl border border-slate-200 bg-white px-8 py-6 shadow-sm">
                     <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
                         <div>
-                            <p className="text-[13px] uppercase tracking-wide text-slate-500">Portfolio overview</p>
-                            <h1 className="mt-1 text-3xl font-semibold text-slate-900">
+                            <p className="text-[13px] text-center uppercase tracking-wide text-slate-500">Portfolio overview</p>
+                            <h1 className="mt-1 text-xl text-center lg:text-3xl font-semibold text-slate-900">
                                 Welcome back to your farmland dashboard
                             </h1>
-                            <p className="mt-2 max-w-2xl text-sm text-slate-600">
+                            <p className="mt-2 max-w-2xl text-center text-sm text-slate-600">
                                 Review current holdings, performance, and funding progress across your agricultural investments.
                             </p>
                         </div>
@@ -119,7 +119,7 @@ const Dashboard = () => {
                     </div>
                 </header>
 
-                <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                <div className="grid gap-4  md:grid-cols-2 xl:grid-cols-4">
                     {highlightCards.map((card) => {
                         const Icon = card.icon
                         return (

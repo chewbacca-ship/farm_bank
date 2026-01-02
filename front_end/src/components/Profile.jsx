@@ -16,6 +16,7 @@ import {
   Bell,
   CreditCard,
   LogOut,
+  UserRoundIcon
 } from "lucide-react";
 
 
@@ -118,11 +119,7 @@ const Profile = () => {
         <header className="flex flex-col gap-6 rounded-3xl bg-white/70 px-8 py-6 shadow-lg ring-1 ring-slate-100 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <div className="relative h-16 w-16 overflow-hidden rounded-2xl ring-4 ring-emerald-100">
-              <img
-                src={userProfile?.avatar || avatarFallback}
-                alt="Profile avatar"
-                className="h-full w-full object-cover"
-              />
+              <UserRoundIcon className="h-14 w-14"/>
             </div>
             <div>
               <h1 className="text-2xl font-semibold text-slate-900 sm:text-3xl">

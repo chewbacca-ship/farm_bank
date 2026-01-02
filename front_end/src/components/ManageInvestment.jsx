@@ -2,6 +2,7 @@ import { InfoIcon, Cog, MessageCircle, PhoneIcon, XIcon, PlusIcon, MinusIcon, Ba
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { dataBase } from "../api/Api";
+import Faq from "./Faq.jsx";
 
 const ManageInvestment = ({currentInvestment, setShowManageInvestment}) => {
     const [currentTab, setCurrentTab] = useState('Action')
@@ -112,7 +113,7 @@ const withdrawMutation = useMutation({
     }
 
     return (
-        <section className=" absolute z-30 top-56 left-[500px] border-transparent w-[700px] bg-white p-8 rounded-md shadow-2xl">
+        <section className=" absolute z-30 top-56 right-0 lg:left-[500px] border-transparent w-screen lg:w-[700px] bg-white  p-10 lg:p-8 rounded-md shadow-2xl overflow-x-hidden">
             <div className="flex flex-row justify-between items-center">
                 <h3 className="flex flex-row items-center font-bold"> 
                     <Cog className="h-4 w-4 mr-2"/> 
@@ -145,7 +146,7 @@ const withdrawMutation = useMutation({
                 <div>
                     { !showAddFunds && !showWithdrawFunds && !showTransferInvestment && !showExitInvestment && 
             
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className="border-3 border-gray-300 shadow-lg p-4 rounded-lg ">
                             <h5 className="font-bold "> <span className="mr-2 text-green-500 font-bold ">+</span>Increase Investment</h5>
                             <p className="my-4">Add more funds to this investment to potentially increase returns.</p>
@@ -464,8 +465,8 @@ const withdrawMutation = useMutation({
                 </div>)}
             {currentTab === 'Support' && (
                 <div>
-                    <div className="flex flex-row"> 
-                        <div className="border-2 border-blue-200 p-3 rounded-xl mr-1">
+                    <div className="flex flex-col"> 
+                        <div className="border-2 border-blue-200 p-3 rounded-xl mr-1 mb-3">
                             <h4 className="flex flex-row font-bold"> 
                                 <MessageCircle className="text-blue-600 mr-2"/> 
                                 Contact Support
@@ -488,7 +489,7 @@ const withdrawMutation = useMutation({
                     </div>
 
                     <article>
-                <h3>Frequently Asked Question</h3>
+                <div><Faq /></div>
                
             </article>
                    

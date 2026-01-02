@@ -12,6 +12,7 @@ import DashboardSelector, { PortfolioSelector, OpportunitiesSelector } from './c
 import StartPage from './components/StartPage'
 import MarketTrends from './components/MarketTrends'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 const queryClient = new QueryClient()
 
@@ -27,7 +28,7 @@ const ProtectedLayout = () => {
     <>
       <Header />
       <Outlet />
-      <Navigation />
+      <Footer />
     </>
   )
 }
@@ -38,7 +39,7 @@ const ProtectedLayout = () => {
     
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <main className="lg:flex lg:flex-col-reverse justify-end">
+        <main className="lg:flex lg:flex-col justify-end w-screen overflow-auto">
           <Routes>
             <Route path="/startpage" element={<StartPage/>} />
 

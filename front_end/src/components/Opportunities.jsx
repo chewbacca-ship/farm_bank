@@ -7,6 +7,7 @@ import {
   Users,
   Clock,
   Shield,
+  ArrowBigDownDash
 } from "lucide-react";
 import InvestNow from "./InvestNow";
 import useOpportunities from "../hooks/useOpportunities";
@@ -64,21 +65,32 @@ const Opportunities = () => {
   console.log("see am o",typeof formattedOpportunities.min);
 
   return (
-    <section className="relative min-h-screen bg-slate-100 py-10">
+    <section className="relative min-h-screen bg-slate-100 py-10 w-screen">
       {showInvestNowModal && <div className="fixed inset-0 z-30 bg-slate-900/50" aria-hidden="true" />}
 
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-6">
-        <header className="rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm">
-          <div className="flex flex-col gap-3">
-            <p className="text-[13px] uppercase tracking-wide text-slate-500">Investment opportunities</p>
-            <h1 className="text-3xl font-semibold text-slate-900">Connect capital with resilient farms</h1>
-            <p className="text-sm text-slate-600">
+                  <h2 className="text-2xl font-bold tracking-wide text-green-900">Investment opportunities</h2>
+                  
+        <header className="rounded-2xl border border-slate-200 bg-white px-6 py-6 shadow-sm ">
+          <div className="flex flex-col gap-3 ">
+  
+            <h1 className="text-2xl text-left lg:text-3xl font-semibold text-slate-900">Connect capital with farms</h1>
+            <p className=" text-base lg:text-sm text-slate-600  leading-8">
               Browse curated agricultural projects with steady growth potential. Each opportunity includes on-the-ground insights, target returns, and funding progress.
+              
             </p>
+            
           </div>
+          
         </header>
+        <div className="flex justify-center items-center">
+           <ArrowBigDownDash className="relative h-6 w-6 text-green-800" />
 
-        <div className="grid gap-5 lg:grid-cols-2">
+        </div>
+       
+        
+      
+        <div className="grid gap-5 lg:grid-cols-2 border">
           {formattedOpportunities.map((opportunity) => {
             const Icon = opportunity.icon || Sprout;
 

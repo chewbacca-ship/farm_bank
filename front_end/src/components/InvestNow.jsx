@@ -17,7 +17,7 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
     const balance = profile?.account?.wallet_balance || 0
 
     const quickAmounts = [
-        investmentOpportunity.min_investment,
+        investmentOpportunity.min_investment * 1,
         investmentOpportunity.min_investment * 2,
         investmentOpportunity.min_investment * 5,
         investmentOpportunity.min_investment * 10
@@ -58,7 +58,7 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
       mutationFn: (payload) => dataBase.addInvestment(payload),
       onSuccess: () => {
         toast.success(
-          `Investment of $${investmentAmount} in ${investmentOpportunity.name} confirmed! 🎉`,
+          `Investment of $${investmentAmount} in ${investmentOpportunity.title} confirmed! 🎉`,
           {style: {
             position: "fixed",
             top: "50%",
@@ -75,6 +75,7 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
     })
 
     console.log(investmentOpportunity.id)
+    console.log(investmentOpportunity)
 
     const handleNext = () => {
         if (currentStep === 'amount' && investmentValue >= investmentOpportunity.min_investment) {
@@ -156,15 +157,15 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
     const renderAmountStep = () => (
     <div className="space-y-6">
       <div className="text-center">
-        <h3 className="mb-2 font-bold text-2xl">How much would you like to invest?</h3>
-        <p className="text-muted-foreground text-xl text-gray-500">
-          Minimum investment: ${investmentOpportunity.min_investment.toLocaleString()}
+        <h3 className="mb-2 font-bold text-xl lg:text-2xl">How much would you like to invest?</h3>
+        <p className="text-muted-foreground text-md lg:text-xl text-green-800">
+          Minimum investment: ${Number(investmentOpportunity.min_investment).toLocaleString()}
         </p>
       </div>
  
       <div className="space-y-4  ">
         <div className="space-y-2">
-          <label htmlFor="amount" className="font-bold ">Investment Amount</label>
+          <label htmlFor="amount" className="font-bold text-md lg:text-base ">Investment Amount</label>
           <div className="relative w-full">
             <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <input
@@ -185,7 +186,7 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
               variant="outline"
               size="sm"
               onClick={() => setInvestmentAmount(amount.toString())}
-              className="h-auto py-3 border border-gray-300 rounded-xl shadow-md"
+              className="h-auto text-sm lg:text-base py-3 border border-gray-300 rounded-xl shadow-md"
             >
               <div className="text-center">
                 <div className="font-medium">${amount.toLocaleString()}</div>
@@ -198,23 +199,23 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
       {investmentValue > 0 && (
         <div className="border p-8 rounded-xl">
           <div className="pb-3">
-            <h4 className="text-lg font-bold mb-4">Investment Projection</h4>
+            <h4 className="text-lg font-bold mb-4 border-b ">Investment Projection</h4>
           </div>
           <div className="space-y-3 ">
-            <div className="grid grid-cols-2 gap-4 text-base">
-              <div>
+            <div className="grid grid-cols-1 gap-4 text-base">
+              <div className="border-b pb-1">
                 <h5 className="text-gray-500 ">Investment Amount</h5>
                 <p className="font-medium ">${investmentValue.toLocaleString()}</p>
               </div>
-              <div>
+              <div className="border-b pb-1">
                 <div className=" text-gray-500">Expected Duration</div>
                 <div className="font-medium">{investmentOpportunity.duration_months}Months</div>
               </div>
-              <div>
+              <div className="border-b pb-1">
                 <div className="text-gray-500">Expected Return Range</div>
                 <div className="font-medium text-green-600">{investmentOpportunity.expected_return}%</div>
               </div>
-              <div>
+              <div className="border-b pb-1">
                 <div className="text-muted-foreground text-gray-500">Projected Profit</div>
                 <div className="font-medium text-green-600">
                   ${projectedReturns.low.toLocaleString()} - ${projectedReturns.high.toLocaleString()}
@@ -266,13 +267,9 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
               <div className="rounded-2xl bg-emerald-50 p-4">
                 <p className="text-sm font-medium text-emerald-700">Investment Amount</p>
                 <p className="text-3xl font-semibold text-emerald-900 mt-1">${investmentValue.toLocaleString()}</p>
-                <p className="text-xs text-emerald-600 mt-1">Minimum required: ${investmentOpportunity.min_investment.toLocaleString()}</p>
+                <p className="text-xs text-emerald-600 mt-1">Minimum required: ${Number(investmentOpportunity.min_investment).toLocaleString()}</p>
               </div>
-              <div className="rounded-2xl bg-slate-900/90 p-4 text-white">
-                <p className="text-sm font-medium text-white/80">Total including fees</p>
-                <p className="text-3xl font-semibold mt-1">${totalAmount.toFixed(2)}</p>
-                <p className="text-xs text-white/70 mt-1">Platform + processing fees included</p>
-              </div>
+            
             </div>
 
             <div className="space-y-3">
@@ -291,52 +288,15 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
                 <p className="text-lg font-semibold text-amber-900">${processingFee.toFixed(2)}</p>
               </div>
             </div>
+              <div className="rounded-2xl bg-slate-900/90 p-4 text-white">
+                <p className="text-sm font-medium text-white/80">Total including fees</p>
+                <p className="text-3xl font-semibold mt-1">${totalAmount.toLocaleString()}</p>
+                <p className="text-xs text-white/70 mt-1">Platform + processing fees included</p>
+              </div>
           </div>
 
           {/* Opportunity Details */}
-          <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-emerald-50 p-6 shadow-sm space-y-4">
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-xs uppercase tracking-wide text-slate-500">Opportunity</p>
-                <h2 className="text-xl font-semibold text-slate-900">{investmentOpportunity.name}</h2>
-                <p className="text-sm text-slate-500 mt-1 flex items-center gap-1">
-                  <MapPin className="h-3.5 w-3.5 text-slate-400" />
-                  {investmentOpportunity.location}
-                </p>
-              </div>
-              <span className={`inline-flex w-fit items-center gap-1 rounded-full border px-3 py-1 text-xs font-semibold ${riskBadgeClass}`}>
-                <Shield className="h-3.5 w-3.5" />
-                {riskLevel} risk
-              </span>
-            </div>
-
-            <p className="text-sm text-slate-600 leading-relaxed">{investmentOpportunity.description}</p>
-
-            <div className="grid gap-3 sm:grid-cols-2 text-sm">
-              <div className="rounded-2xl border border-slate-100 bg-white/80 p-4">
-                <p className="text-xs uppercase text-slate-500">Expected return</p>
-                <p className="text-lg font-semibold text-emerald-700 mt-1">{investmentOpportunity.expected_return}%</p>
-              </div>
-              <div className="rounded-2xl border border-slate-100 bg-white/80 p-4">
-                <p className="text-xs uppercase text-slate-500">Duration</p>
-                <p className="text-lg font-semibold text-slate-900 mt-1">{investmentOpportunity.duration_months} months</p>
-              </div>
-              <div className="rounded-2xl border border-slate-100 bg-white/80 p-4">
-                <p className="text-xs uppercase text-slate-500">Investors</p>
-                <p className="text-lg font-semibold text-slate-900 mt-1 flex items-center gap-1">
-                  <Users className="h-4 w-4 text-slate-400" />
-                  {investmentOpportunity.investors}
-                </p>
-              </div>
-              <div className="rounded-2xl border border-slate-100 bg-white/80 p-4">
-                <p className="text-xs uppercase text-slate-500">Funding progress</p>
-                <p className="text-lg font-semibold text-emerald-700 mt-1 flex items-center gap-1">
-                  <TrendingUp className="h-4 w-4 text-emerald-500" />
-                  {Math.round(investmentOpportunity.fundingProgress || 0)}%
-                </p>
-              </div>
-            </div>
-          </div>
+         
         </div>
 
         {/* Terms and Conditions */}
@@ -487,7 +447,7 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
         <div>
           <h3 className="text-2xl font-semibold text-slate-900">Investment confirmed!</h3>
           <p className="text-sm text-slate-500">
-            You’ve successfully invested ${investmentValue.toLocaleString()} in {investmentOpportunity.name}. We’ll keep you updated as it
+            You’ve successfully invested ${investmentValue.toLocaleString()} in {investmentOpportunity.title}. We’ll keep you updated as it
             progresses.
           </p>
         </div>
@@ -562,10 +522,10 @@ const InvestNow = ({investmentOpportunity, setShowInvestNowModal}) => {
 
 
     return (
-        <section className=" absolute z-30 top-56 border-transparent w-[700px] bg-white p-8 rounded-md shadow-2xl">
+        <section className=" absolute z-30 top-56 border-transparent w-screen lg:w-[700px] bg-white p-10 lg:p-8 rounded-md shadow-2xl">
             <div>
-                <h1 className="font-bold text-2xl my-2">
-                    {currentStep === 'success' ? "Investment Complete" : "Invest in" + investmentOpportunity.name}
+                <h1 className="font-bold text-2xl my-2 text-green-900 font-semiboldinvestmentOpportunity.title">
+                    {currentStep === 'success' ? "Investment Complete" : "Invest in " + investmentOpportunity.title}
                 </h1>
                 {currentStep !== 'success' && (
                     <h2 className="text-gray-500 mb-2"> 
